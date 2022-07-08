@@ -127,12 +127,9 @@ screens = [
                 widget.CurrentLayout(),
                 widget.TextBox(text="|", font="Ubuntu Mono"),
                 widget.WindowName(),
-                
-                widget.Sep(linewidth=0,padding=6),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.Sep(linewidth=0,padding=6),
-                
+
                 widget.Prompt(),
+                
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
@@ -141,6 +138,8 @@ screens = [
                 widget.Systray(),
                 
                 widget.QuickExit(),
+                widget.TextBox(text="◂", fontsize=37),
+                widget.TextBox(text="◂", fontsize=14)
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders

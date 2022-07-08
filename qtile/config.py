@@ -33,6 +33,7 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from os.path import expanduser
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -79,7 +80,7 @@ keys = [
 ]
 
 group_names = 'SFX DEV WWW VM VS GIT CHAT VIM SYS'.split()
-groups = [Group(name, layout='max') for name in group_names]
+groups = [Group(name, layout='monadtall') for name in group_names]
 for i, name in enumerate(group_names):
     indx = str(i + 1)
     keys += [
@@ -117,8 +118,14 @@ screens = [
                     linewidth = 0,
                     padding = 6
                 ),
+                widget.Image(filename="~/.config/qtile/assets/python.png", scale="False"),
                 widget.GroupBox(),
                 widget.TextBox(text="|", font="Ubuntu Mono"),
+                widget.CurrentLayoutIcon(
+                       custom_icon_paths = [expanduser("~/.config/qtile/assets/icons")],
+                       padding = 0,
+                       scale = 0.7
+                       ),
                 widget.CurrentLayout(),
                 widget.TextBox(text="|", font="Ubuntu Mono"),
                 widget.Prompt(),

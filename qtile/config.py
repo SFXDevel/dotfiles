@@ -89,7 +89,7 @@ for i, name in enumerate(group_names):
 layout_theme = {"border_width": 2,
                 "margin": 8,
                 "border_focus": "fefffe",
-                "border_normal": "000000"
+                "border_normal": "cccccc"
                 }
 
 

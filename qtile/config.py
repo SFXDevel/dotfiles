@@ -137,9 +137,9 @@ screens = [
                     name_transform=lambda name: name.upper(),),
                 widget.Systray(),
                 
-                widget.QuickExit(),
-                widget.TextBox(text="◂", fontsize=37),
-                widget.TextBox(text="◂", fontsize=14)
+                #widget.QuickExit(),
+                widget.TextBox(text="◂", fontsize=30),
+                widget.TextBox(text="◂", fontsize=30)
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders

@@ -98,7 +98,6 @@ layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
-    layout.Stack(num_stacks=2),
     layout.RatioTile(**layout_theme),
     layout.Floating(**layout_theme)
 ]
@@ -115,11 +114,9 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Sep(
-                    linewidth = 0,
-                    padding = 6
-                ),
+                widget.Sep(linewidth=0,padding=6),
                 widget.Image(filename="~/.config/qtile/assets/icons/python.png", scale="False"),
+                widget.Sep(linewidth=0,padding=6),
                 widget.GroupBox(),
                 widget.TextBox(text="|", font="Ubuntu Mono"),
                 widget.CurrentLayoutIcon(
@@ -129,18 +126,20 @@ screens = [
                        ),
                 widget.CurrentLayout(),
                 widget.TextBox(text="|", font="Ubuntu Mono"),
-                widget.Prompt(),
                 widget.WindowName(),
+                widget.Prompt(),
+                
+                widget.Sep(linewidth=0,padding=6),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.Sep(linewidth=0,padding=6),
+                
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
                     },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                    name_transform=lambda name: name.upper(),),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                
                 widget.QuickExit(),
             ],
             24,

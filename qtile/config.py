@@ -1,13 +1,13 @@
  # ----------------------------------------------------------------------- #
 #                                  config.py                                #
 # ------------------------------------------------------------------------- #
-#			              Copyright (c) 2022 SFXDevel                       #
+#                           Copyright (c) 2022 SFXDevel                     #
 #                           ______     ______   __  __                      #
 #                          /\  ___\   /\  ___\ /\_\_\_\                     #
 #                          \ \___  \  \ \  __\ \/_/\_\/_                    #
 #                           \/\_____\  \ \_\     /\_\/\_\                   #
 #                            \/_____/   \/_/     \/_/\/_/                   #
-#			               https://github.com/SFXDevel                      #
+#                            https://github.com/SFXDevel                    #
  # ----------------------------------------------------------------------- #
 # Permission is hereby granted, free of charge, to any person obtaining     #
 # a copy of this software and associated documentation files (the           #

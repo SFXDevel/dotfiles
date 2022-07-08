@@ -86,20 +86,20 @@ for i, name in enumerate(group_names):
         Key([mod], indx, lazy.group[name].toscreen()),
         Key([mod, 'shift'], indx, lazy.window.togroup(name))]
 
+layout_theme = {"border_width": 2,
+                "margin": 8,
+                "border_focus": "e1acff",
+                "border_normal": "1D2330"
+                }
+
+
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+    layout.MonadTall(**layout_theme),
+    layout.Max(**layout_theme),
+    layout.Stack(num_stacks=2),
+    layout.RatioTile(**layout_theme),
+    layout.Floating(**layout_theme)
 ]
 
 widget_defaults = dict(

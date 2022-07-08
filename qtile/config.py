@@ -127,12 +127,12 @@ screens = [
                 widget.CurrentLayout(),
                 widget.TextBox(text="|", font="Ubuntu Mono"),
                 widget.WindowName(),
-                widget.Prompt(),
                 
                 widget.Sep(linewidth=0,padding=6),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 widget.Sep(linewidth=0,padding=6),
                 
+                widget.Prompt(),
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),

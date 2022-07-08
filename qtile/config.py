@@ -78,7 +78,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
-group_names = 'WWW DEV SYS ETC'.split()
+group_names = 'SFX DEV WWW VM VS GIT CHAT VIM SYS'.split()
 groups = [Group(name, layout='max') for name in group_names]
 for i, name in enumerate(group_names):
     indx = str(i + 1)
@@ -113,8 +113,14 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.CurrentLayout(),
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 6
+                ),
                 widget.GroupBox(),
+                widget.TextBox(text="|", font="Ubuntu Mono"),
+                widget.CurrentLayout(),
+                widget.TextBox(text="|", font="Ubuntu Mono"),
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Chord(

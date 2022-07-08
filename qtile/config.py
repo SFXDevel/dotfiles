@@ -37,17 +37,6 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = guess_terminal()
 
-def workspaceNames():
-    return [("SFX", {'layout':'max'}),
-            ("WWW", {'layout':'max'}),
-            ("MUS", {'layout':'max'}),
-            ("DEV", {'layout':'max'}),
-            ("CLI", {'layout':'max'}),
-            ("DOC", {'layout':'max'}),
-            ("VS", {'layout':'max'}),
-            ("CHAT", {'layout':'max'}),
-            ("VIM", {'layout':'max'}),]
-
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -89,17 +78,31 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
+groups = [Group(i) for i in "123456789"]
 
-def initWorkspaces():
-    return [Group(name, **kwargs) for name, kwargs in workspaceNames]
-
-if __name__ in ["config", "__main__"]:
-    workspacenames=workspaceNames()
-    workspaces=initWorkspaces()
-
-for i, (name, kwargs) in enumerate(workspaceNames, 1):
-    keys.append(Key([mod], str(i), lazy.group[name].toscreen()))
-    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
+for i in groups:
+    keys.extend(
+        [
+            # mod1 + letter of group = switch to group
+            Key(
+                [mod],
+                i.name,
+                lazy.group[i.name].toscreen(),
+                desc="Switch to group {}".format(i.name),
+            ),
+            # mod1 + shift + letter of group = switch to & move focused window to group
+            Key(
+                [mod, "shift"],
+                i.name,
+                lazy.window.togroup(i.name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(i.name),
+            ),
+            # Or, use below if you prefer not to switch to that group.
+            # # mod1 + shift + letter of group = move focused window to group
+            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+            #     desc="move focused window to group {}".format(i.name)),
+        ]
+    )
 
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),

@@ -118,7 +118,7 @@ screens = [
                     linewidth = 0,
                     padding = 6
                 ),
-                widget.Image(filename="~/.config/qtile/assets/python.png", scale="False"),
+                widget.Image(filename="~/.config/qtile/assets/icons/python.png", scale="False"),
                 widget.GroupBox(),
                 widget.TextBox(text="|", font="Ubuntu Mono"),
                 widget.CurrentLayoutIcon(

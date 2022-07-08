@@ -110,6 +110,13 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+def custom_layout():
+    mlayout = ""
+    if widget.CurrentLayout() == "max":
+        mlayout = "   max   "
+    widget.TextBox(mlayout)
+
+
 screens = [
     Screen(
         top=bar.Bar(
@@ -127,6 +134,14 @@ screens = [
                        scale = 0.7
                        ),
                 widget.CurrentLayout(),
+                widget.TextBox(text="|", font="Ubuntu Mono"),
+                #testing custom layout
+                widget.CurrentLayoutIcon(
+                       custom_icon_paths = [expanduser("~/.config/qtile/assets/icons")],
+                       padding = 0,
+                       scale = 0.7
+                       ),
+                custom_layout(),
                 widget.TextBox(text="|", font="Ubuntu Mono"),
                 widget.Prompt(),
                 widget.WindowName(),

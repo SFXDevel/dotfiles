@@ -135,14 +135,13 @@ screens = [
                         "launch": ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),),
-                widget.Image(filename='~/.config/qtile/assets/powerline/arrow.jpg'),
                 widget.Systray(),
-                
                 widget.QuickExit(),
+                widget.Image(filename='~/.config/qtile/assets/powerline/arrow-white.png'),
+
             ],
             24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            background="#FFFFFF"
         ),
     ),
 ]

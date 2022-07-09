@@ -135,11 +135,10 @@ screens = [
                         "launch": ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),),
+                widget.Image(filename='~/.config/qtile/assets/powerline/arrow.jpg'),
                 widget.Systray(),
                 
-                #widget.QuickExit(),
-                widget.TextBox(text="◂", fontsize=30, padding=0),
-                widget.TextBox(text="◂", fontsize=30, padding=0),
+                widget.QuickExit(),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders

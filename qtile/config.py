@@ -141,7 +141,7 @@ screens = [
 
             ],
             24,
-            background="#FFFFFF"
+            background="#cccccc"
         ),
     ),
 ]

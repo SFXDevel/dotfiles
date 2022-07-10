@@ -29,18 +29,48 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                    #
  # ----------------------------------------------------------------------- #
 
+
+# ---------- Modules ---------- #
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from os.path import expanduser
 
+# ---------- Variables ---------- #
 mod = "mod4"
 terminal = guess_terminal()
+workspaceNames = 'SFX DEV WWW VM VS GIT CHAT VIM SYS'.split()
+groups = [Group(name, layout='monadtall') for name in workspaceNames]
+dgroups_key_binder = None
+dgroups_app_rules = []
+follow_mouse_focus = True
+bring_front_click = False
+cursor_warp = False
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+reconfigure_screens = True
+auto_minimize = True
+wl_input_rules = None
+wmname = "LG3D"
 
+# ---------- Window Configuration ---------- #
+layoutTheme = dict(
+    border_width=2,
+    margin=8,
+    border_focus="fefffe",
+    border_normal="a3a3a3"
+    )
+layouts = [
+    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.MonadTall(**layoutTheme),
+    layout.Max(**layoutTheme),
+    layout.RatioTile(**layoutTheme),
+    layout.Floating(**layoutTheme)
+    ]
+
+# ---------- Key Bindings ---------- #
 keys = [
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -48,13 +78,11 @@ keys = [
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
     Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
@@ -79,37 +107,14 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
-group_names = 'SFX DEV WWW VM VS GIT CHAT VIM SYS'.split()
-groups = [Group(name, layout='monadtall') for name in group_names]
-for i, name in enumerate(group_names):
+
+for i, name in enumerate(workspaceNames):
     indx = str(i + 1)
     keys += [
         Key([mod], indx, lazy.group[name].toscreen()),
         Key([mod, 'shift'], indx, lazy.window.togroup(name))]
 
-layout_theme = {"border_width": 2,
-                "margin": 8,
-                "border_focus": "fefffe",
-                "border_normal": "a3a3a3"
-                }
-
-
-layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.MonadTall(**layout_theme),
-    layout.Max(**layout_theme),
-    layout.RatioTile(**layout_theme),
-    layout.Floating(**layout_theme)
-]
-
-widget_defaults = dict(
-    font="sans",
-    fontsize=12,
-    padding=3,
-)
-extension_defaults = widget_defaults.copy()
-
-
+# ---------- Bars ---------- #
 screens = [
     Screen(
         top=bar.Bar(
@@ -153,11 +158,6 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
-dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
-bring_front_click = False
-cursor_warp = False
 floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
@@ -170,23 +170,3 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
     ]
 )
-auto_fullscreen = True
-focus_on_window_activation = "smart"
-reconfigure_screens = True
-
-# If things like steam games want to auto-minimize themselves when losing
-# focus, should we respect this or not?
-auto_minimize = True
-
-# When using the Wayland backend, this can be used to configure input devices.
-wl_input_rules = None
-
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
-wmname = "LG3D"
